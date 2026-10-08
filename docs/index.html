@@ -51,6 +51,248 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 }
 </style>
 
+<style>
+:root {
+    --page-accent: #6366f1;
+    --page-accent-strong: #4f46e5;
+    --page-accent-soft: rgba(99, 102, 241, .12);
+    --page-surface: rgba(255, 255, 255, .78);
+    --page-border: rgba(99, 102, 241, .16);
+    --page-shadow: 0 20px 60px rgba(30, 41, 59, .10);
+}
+
+* { box-sizing: border-box; }
+
+html {
+    min-height: 100%;
+    background:
+        radial-gradient(circle at 12% 8%, rgba(129, 140, 248, .20), transparent 30rem),
+        radial-gradient(circle at 88% 18%, rgba(56, 189, 248, .14), transparent 28rem),
+        var(--bgColor-default, var(--color-canvas-default));
+    background-attachment: fixed;
+}
+
+body {
+    width: min(100% - 32px, 980px);
+    min-height: calc(100vh - 48px);
+    max-width: none;
+    margin: 24px auto;
+    padding: 32px 42px 28px;
+    color: var(--fgColor-default, var(--color-fg-default));
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    background: var(--page-surface);
+    border: 1px solid var(--page-border);
+    border-radius: 28px;
+    box-shadow: var(--page-shadow);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+#header {
+    align-items: center;
+    padding: 0 0 24px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));
+}
+
+#header h1 {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    letter-spacing: -.04em;
+}
+
+.avatar {
+    width: 58px;
+    height: 58px;
+    border: 3px solid rgba(255, 255, 255, .86);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, .22);
+}
+
+.avatar:hover { transform: scale(1.06) rotate(8deg); }
+
+#header h1 a {
+    margin-left: 0;
+    font-family: inherit;
+    font-size: clamp(28px, 5vw, 38px);
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.title-right {
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 0 auto;
+}
+
+.title-right .circle {
+    display: inline-grid;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    place-items: center;
+    color: var(--fgColor-muted, var(--color-fg-muted));
+    background: var(--bgColor-muted, var(--color-canvas-subtle));
+    border: 1px solid var(--borderColor-muted, var(--color-border-muted));
+    border-radius: 13px !important;
+    transition: transform .2s ease, color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+
+.title-right .circle:hover {
+    color: var(--page-accent-strong);
+    background: var(--page-accent-soft);
+    border-color: rgba(99, 102, 241, .28);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, .12);
+    transform: translateY(-2px);
+}
+
+.title-right .circle:focus-visible,
+.SideNav-item:focus-visible {
+    outline: 3px solid rgba(99, 102, 241, .3);
+    outline-offset: 3px;
+}
+
+#content { padding-top: 44px; }
+
+#content > div:first-child {
+    position: relative;
+    margin: 0 0 28px !important;
+    padding: 28px 30px;
+    overflow: hidden;
+    color: #fff;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 750;
+    letter-spacing: -.03em;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #4f46e5 0%, #6366f1 48%, #0ea5e9 100%);
+    box-shadow: 0 16px 38px rgba(79, 70, 229, .22);
+}
+
+#content > div:first-child::after {
+    content: "✦";
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    color: rgba(255, 255, 255, .32);
+    font-size: 64px;
+    font-weight: 400;
+    transform: translateY(-50%);
+}
+
+.SideNav {
+    min-width: 0;
+    overflow: visible;
+    background: transparent;
+    border: 0 !important;
+}
+
+.SideNav-item {
+    gap: 20px;
+    min-height: 82px;
+    padding: 18px 20px;
+    color: inherit;
+    background: var(--bgColor-default, var(--color-canvas-default));
+    border: 1px solid var(--borderColor-muted, var(--color-border-muted)) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 8px 26px rgba(30, 41, 59, .06);
+    transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+.SideNav-item:hover {
+    color: var(--fgColor-default, var(--color-fg-default));
+    background: var(--bgColor-default, var(--color-canvas-default));
+    border-color: rgba(99, 102, 241, .42) !important;
+    box-shadow: 0 16px 36px rgba(79, 70, 229, .12);
+    transform: translateY(-3px);
+}
+
+.SideNav-icon {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    margin-right: 14px;
+    color: var(--page-accent);
+}
+
+.listTitle {
+    font-size: 16px;
+    font-weight: 650;
+    line-height: 1.5;
+}
+
+.listLabels { align-items: center; gap: 7px; }
+.SideNav-item .Label {
+    margin-left: 0;
+    padding: 5px 9px;
+    border: 0;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 650;
+}
+
+#footer {
+    padding-top: 24px;
+    margin-top: 70px;
+    color: var(--fgColor-muted, var(--color-fg-muted));
+    line-height: 1.8;
+    border-top: 1px solid var(--borderColor-muted, var(--color-border-muted));
+}
+
+#footer a { color: var(--page-accent-strong); }
+
+html[data-color-mode="dark"] {
+    --page-surface: rgba(13, 17, 23, .82);
+    --page-border: rgba(129, 140, 248, .16);
+    --page-shadow: 0 22px 70px rgba(0, 0, 0, .34);
+}
+
+@media (prefers-color-scheme: dark) {
+    html[data-color-mode="auto"] {
+        --page-surface: rgba(13, 17, 23, .82);
+        --page-border: rgba(129, 140, 248, .16);
+        --page-shadow: 0 22px 70px rgba(0, 0, 0, .34);
+    }
+}
+
+@media (max-width: 680px) {
+    body {
+        width: min(100% - 20px, 980px);
+        min-height: calc(100vh - 20px);
+        margin: 10px auto;
+        padding: 22px 18px;
+        border-radius: 22px;
+    }
+    #header { padding-bottom: 18px; }
+    .avatar { width: 46px; height: 46px; }
+    .blogTitle { display: inline; }
+    .title-right { gap: 5px; }
+    .title-right .circle { width: 38px; height: 38px; }
+    #buttonRSS { display: none; }
+    #content { padding-top: 28px; }
+    #content > div:first-child { padding: 23px 22px; border-radius: 18px; }
+    #content > div:first-child::after { right: 18px; font-size: 48px; }
+    .SideNav-item { align-items: flex-start !important; flex-direction: column; gap: 12px; padding: 17px; }
+    .listLabels { padding-left: 34px; }
+    .LabelTime { display: inline; }
+}
+
+@media (max-width: 420px) {
+    .blogTitle { display: none; }
+    #content > div:first-child::after { display: none; }
+    .listLabels { padding-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+</style>
+
 
 
 <body>
@@ -82,7 +324,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <nav class="SideNav border">
 <a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/shi-yong-GitHub-wei-zi-ji-da-zao-yi-ge-mian-fei-qie-wen-ding-de-ge-ren-bo-ke-wang-zhan.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">使用GitHub为自己打造一个免费且稳定的个人博客网站</span>
     </div>
